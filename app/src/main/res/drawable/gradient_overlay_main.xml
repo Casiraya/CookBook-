@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Gradient background -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#AAFFF3E0"
+                android:centerColor="#AAFFE0C2"
+                android:endColor="#AAFFCC99"
+                android:angle="270"/>
+        </shape>
+    </item>
+
+    <!-- Vegetable Image Overlay -->
+    <item>
+        <bitmap
+            android:src="@drawable/vegetable_bg"
+            android:gravity="center"
+            android:tileMode="disabled"/>
+    </item>
+
+</layer-list>
