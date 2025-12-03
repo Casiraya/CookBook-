@@ -47,11 +47,14 @@ class Uploadrecipe : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, userpage::class.java))
+                    finish()
+                }
                 R.id.nav_profile -> {
                     startActivity(Intent(this, Profile::class.java))
                 }
                 R.id.nav_about -> {
-                    // Navigate to About Us Page
                     startActivity(Intent(this, AboutUs::class.java))
                 }
                 R.id.nav_signout -> {
@@ -81,6 +84,11 @@ class Uploadrecipe : AppCompatActivity() {
                 }
                 R.id.nav_cookbook -> {
                     // Already on Upload page
+                    true
+                }
+                R.id.nav_notifications -> {
+                    startActivity(Intent(this, Notifications::class.java))
+                    finish()
                     true
                 }
                 else -> false

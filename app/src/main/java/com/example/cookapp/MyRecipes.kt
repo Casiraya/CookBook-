@@ -44,11 +44,14 @@ class MyRecipes : AppCompatActivity() {
         // 4. Drawer Navigation Logic
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, userpage::class.java))
+                    finish()
+                }
                 R.id.nav_profile -> {
                     startActivity(Intent(this, Profile::class.java))
                 }
                 R.id.nav_about -> {
-                    // Navigate to About Us Page
                     startActivity(Intent(this, AboutUs::class.java))
                 }
                 R.id.nav_signout -> {
@@ -72,11 +75,16 @@ class MyRecipes : AppCompatActivity() {
                     true
                 }
                 R.id.nav_my_recipes -> {
-                    // Already on My Recipes page
+                    // Already on My Recipes
                     true
                 }
                 R.id.nav_cookbook -> {
                     startActivity(Intent(this, Uploadrecipe::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_notifications -> {
+                    startActivity(Intent(this, Notifications::class.java))
                     finish()
                     true
                 }

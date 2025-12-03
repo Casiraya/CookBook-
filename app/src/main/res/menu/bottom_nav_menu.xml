@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Home Item -->
     <item
         android:id="@+id/nav_home"
-        android:icon="@android:drawable/ic_menu_view"
+        android:icon="@android:drawable/ic_menu_rotate"
         android:title="Home" />
 
-    <!-- Cookbook (Upload) Item -->
-    <item
-        android:id="@+id/nav_cookbook"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="Cookbook" />
-
-    <!-- My Recipes Item -->
     <item
         android:id="@+id/nav_my_recipes"
         android:icon="@android:drawable/ic_menu_agenda"
         android:title="My Recipes" />
+
+    <item
+        android:id="@+id/nav_cookbook"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Upload" />
+
+    <!-- NEW ITEM -->
+    <item
+        android:id="@+id/nav_notifications"
+        android:icon="@android:drawable/ic_dialog_email"
+        android:title="Notifs" />
 
 </menu>

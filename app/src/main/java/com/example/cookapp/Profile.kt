@@ -61,12 +61,15 @@ class Profile : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, userpage::class.java))
+                    finish()
+                }
                 R.id.nav_profile -> {
                     // Already on Profile
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.nav_about -> {
-                    // Navigate to About Us Page
                     startActivity(Intent(this, AboutUs::class.java))
                 }
                 R.id.nav_signout -> {
@@ -85,14 +88,22 @@ class Profile : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_home -> {
                     startActivity(Intent(this, userpage::class.java))
+                    finish()
                     true
                 }
                 R.id.nav_my_recipes -> {
                     startActivity(Intent(this, MyRecipes::class.java))
+                    finish()
                     true
                 }
                 R.id.nav_cookbook -> {
                     startActivity(Intent(this, Uploadrecipe::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_notifications -> {
+                    startActivity(Intent(this, Notifications::class.java))
+                    finish()
                     true
                 }
                 else -> false

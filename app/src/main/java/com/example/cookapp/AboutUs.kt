@@ -44,9 +44,12 @@ class AboutUs : AppCompatActivity() {
         // 4. Drawer Navigation Logic
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, userpage::class.java))
+                    finish()
+                }
                 R.id.nav_profile -> {
                     startActivity(Intent(this, Profile::class.java))
-                    // finish() // Optional: depends if you want to keep stack
                 }
                 R.id.nav_about -> {
                     // Already on About Us page
@@ -64,9 +67,6 @@ class AboutUs : AppCompatActivity() {
         }
 
         // 5. Bottom Navigation Logic
-        // Since "About Us" isn't a bottom tab item, we don't highlight any item by default
-        // or you could clear selection if needed: bottomNav.menu.setGroupCheckable(0, true, false)
-
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
@@ -81,6 +81,11 @@ class AboutUs : AppCompatActivity() {
                 }
                 R.id.nav_cookbook -> {
                     startActivity(Intent(this, Uploadrecipe::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_notifications -> {
+                    startActivity(Intent(this, Notifications::class.java))
                     finish()
                     true
                 }

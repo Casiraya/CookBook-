@@ -13,14 +13,14 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
-class userpage : AppCompatActivity() {
+class Notifications : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_userpage)
+        setContentView(R.layout.activity_notifications)
 
         // 1. Initialize Views
         drawerLayout = findViewById(R.id.drawerLayout)
@@ -29,27 +29,22 @@ class userpage : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val mainLayout = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.main)
 
-        // 2. Handle Edge-to-Edge Padding
+        // 2. Handle Insets
         ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // 3. Drawer Toggle (Burger Icon)
+        // 3. Drawer Logic
         topAppBar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // 4. Drawer Navigation Logic
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_profile -> {
-                    startActivity(Intent(this, Profile::class.java))
-                }
-                R.id.nav_about -> {
-                    startActivity(Intent(this, AboutUs::class.java))
-                }
+                R.id.nav_profile -> startActivity(Intent(this, Profile::class.java))
+                R.id.nav_about -> startActivity(Intent(this, AboutUs::class.java))
                 R.id.nav_signout -> {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -61,24 +56,27 @@ class userpage : AppCompatActivity() {
             true
         }
 
-        // 5. Bottom Navigation Logic (Including Notifications)
-        bottomNav.selectedItemId = R.id.nav_home // Highlight Home by default
+        // 4. Bottom Nav Logic
+        bottomNav.selectedItemId = R.id.nav_notifications
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    // Already on Home
+                    startActivity(Intent(this, userpage::class.java))
+                    finish()
                     true
                 }
                 R.id.nav_my_recipes -> {
                     startActivity(Intent(this, MyRecipes::class.java))
+                    finish()
                     true
                 }
                 R.id.nav_cookbook -> {
                     startActivity(Intent(this, Uploadrecipe::class.java))
+                    finish()
                     true
                 }
                 R.id.nav_notifications -> {
-                    startActivity(Intent(this, Notifications::class.java))
+                    // Already here
                     true
                 }
                 else -> false
