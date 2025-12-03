@@ -29,14 +29,14 @@ class userpage : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val mainLayout = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.main)
 
-        // Handle Window Insets for proper padding
+        // Handle Window Insets
         ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // --- 1. HANDLE BURGER ICON CLICK ---
+        // --- 1. HANDLE BURGER ICON CLICK (OPEN DRAWER) ---
         topAppBar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
@@ -45,33 +45,33 @@ class userpage : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_profile -> {
-                    // Navigate to Profile Activity
-                    val intent = Intent(this, Profile::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this, Profile::class.java))
                 }
                 R.id.nav_about -> {
-                    Toast.makeText(this, "About Us: Version 1.0", Toast.LENGTH_SHORT).show()
+                    // Navigate to About Us Page
+                    startActivity(Intent(this, AboutUs::class.java))
                 }
                 R.id.nav_signout -> {
-                    // Sign Out Logic
                     Toast.makeText(this, "Signing Out...", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
-                    // Clear the back stack so the user cannot return to this page
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
                 }
             }
-            // Close the drawer after clicking an item
             drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
 
-        // --- 3. HANDLE BOTTOM NAVIGATION CLICKS ---
+        // --- 3. HANDLE BOTTOM NAV LOGIC ---
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    // Current page
+                    // Already on home/userpage
+                    true
+                }
+                R.id.nav_my_recipes -> {
+                    startActivity(Intent(this, MyRecipes::class.java))
                     true
                 }
                 R.id.nav_cookbook -> {

@@ -6,7 +6,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Uploadrecipe">
+    tools:context=".AboutUs">
 
     <!-- MAIN CONTENT -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,14 +15,14 @@
         android:layout_height="match_parent"
         android:background="#F4EDE4">
 
-        <!-- Top Bar -->
+        <!-- TITLE NAVBAR -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#BA5D35"
             android:elevation="4dp"
-            app:title="Upload Recipe"
+            app:title="About Us"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@android:drawable/ic_menu_sort_by_size"
             app:navigationIconTint="@android:color/white"
@@ -30,8 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- ScrollView for form content -->
-        <!-- Constrained between Top Bar and Bottom Nav -->
+        <!-- SCROLLABLE CONTENT -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -44,74 +43,57 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
+                <!-- Logo Image -->
                 <ImageView
-                    android:id="@+id/ivRecipeImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="#E0E0E0"
-                    android:scaleType="centerCrop"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    app:tint="#5D4037" />
+                    android:id="@+id/ivLogo"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/cookbook_logo"
+                    android:contentDescription="App Logo" />
 
+                <!-- App Name -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:text="Tap to add photo"
+                    android:text="CookBook+"
                     android:textColor="#BA5D35"
-                    android:textSize="12sp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
 
-                <!-- Recipe Name Input -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <!-- Version -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Version 1.0.0"
+                    android:textColor="#5D4037"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Description -->
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:hint="Recipe Name"
-                    app:boxStrokeColor="#BA5D35"
-                    app:hintTextColor="#BA5D35">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etRecipeName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textCapWords"
-                        android:textColor="#5D4037" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Ingredients Input -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Ingredients"
-                    app:boxStrokeColor="#BA5D35"
-                    app:hintTextColor="#BA5D35">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etIngredients"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="top|start"
-                        android:inputType="textMultiLine"
-                        android:minLines="3"
-                        android:textColor="#5D4037" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Upload Button -->
-                <Button
-                    android:id="@+id/btnUpload"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:backgroundTint="#BA5D35"
-                    android:padding="12dp"
-                    android:text="Post Recipe"
-                    android:textAllCaps="false"
+                    android:text="Welcome to CookBook+, your ultimate companion for discovering, saving, and sharing delicious recipes.\n\nOur mission is to bring food lovers together and make cooking accessible and fun for everyone.\n\nWhether you are a professional chef or a home cook, CookBook+ offers a platform to showcase your culinary creations and find inspiration for your next meal."
+                    android:textColor="#5D4037"
                     android:textSize="16sp"
-                    app:cornerRadius="8dp" />
+                    android:lineSpacingExtra="4dp"
+                    android:justificationMode="inter_word"
+                    android:gravity="center_horizontal" />
+
+                <!-- Credits / Footer -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:text="© 2024 CookBook+ Team"
+                    android:textColor="#8D6E63"
+                    android:textSize="12sp" />
 
             </LinearLayout>
         </ScrollView>

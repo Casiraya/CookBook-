@@ -2,8 +2,6 @@ package com.example.cookapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,24 +12,15 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.textfield.TextInputEditText
 
-class Profile : AppCompatActivity() {
+class AboutUs : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
-
-    // UI Elements
-    private lateinit var etName: TextInputEditText
-    private lateinit var etBio: TextInputEditText
-    private lateinit var btnAction: Button
-
-    // Track if we are in "Editing Mode"
-    private var isEditing = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_about_us)
 
         // 1. Initialize Views
         drawerLayout = findViewById(R.id.drawerLayout)
@@ -40,34 +29,28 @@ class Profile : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val mainLayout = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.main)
 
-        etName = findViewById(R.id.etName)
-        etBio = findViewById(R.id.etBio)
-        btnAction = findViewById(R.id.btnAction)
-
-        // 2. Handle System Bar Padding
+        // 2. Handle Edge-to-Edge Padding
         ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // 3. Set Initial State (Read-only)
-        setEditingEnabled(false)
-
-        // 4. Handle Drawer Menu
+        // 3. Drawer Toggle
         topAppBar.setNavigationOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
+        // 4. Drawer Navigation Logic
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_profile -> {
-                    // Already on Profile
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    startActivity(Intent(this, Profile::class.java))
+                    // finish() // Optional: depends if you want to keep stack
                 }
                 R.id.nav_about -> {
-                    // Navigate to About Us Page
-                    startActivity(Intent(this, AboutUs::class.java))
+                    // Already on About Us page
+                    drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.nav_signout -> {
                     val intent = Intent(this, MainActivity::class.java)
@@ -80,53 +63,29 @@ class Profile : AppCompatActivity() {
             true
         }
 
-        // 5. Handle Bottom Navigation
+        // 5. Bottom Navigation Logic
+        // Since "About Us" isn't a bottom tab item, we don't highlight any item by default
+        // or you could clear selection if needed: bottomNav.menu.setGroupCheckable(0, true, false)
+
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
                     startActivity(Intent(this, userpage::class.java))
+                    finish()
                     true
                 }
                 R.id.nav_my_recipes -> {
                     startActivity(Intent(this, MyRecipes::class.java))
+                    finish()
                     true
                 }
                 R.id.nav_cookbook -> {
                     startActivity(Intent(this, Uploadrecipe::class.java))
+                    finish()
                     true
                 }
                 else -> false
             }
         }
-
-        // 6. "Update" / "Save Changes" Button Logic
-        btnAction.setOnClickListener {
-            if (!isEditing) {
-                // SWITCH TO EDIT MODE
-                isEditing = true
-                setEditingEnabled(true)
-                btnAction.text = "Save Changes"
-                etName.requestFocus()
-            } else {
-                // SAVE CHANGES
-                val newName = etName.text.toString().trim()
-
-                if (newName.isEmpty()) {
-                    etName.error = "Name cannot be empty"
-                } else {
-                    Toast.makeText(this, "Profile Updated!", Toast.LENGTH_SHORT).show()
-
-                    // SWITCH BACK TO READ-ONLY MODE
-                    isEditing = false
-                    setEditingEnabled(false)
-                    btnAction.text = "Update"
-                }
-            }
-        }
-    }
-
-    private fun setEditingEnabled(enabled: Boolean) {
-        etName.isEnabled = enabled
-        etBio.isEnabled = enabled
     }
 }
